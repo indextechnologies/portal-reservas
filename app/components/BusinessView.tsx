@@ -110,7 +110,7 @@ export default function BusinessView({ reservations, onCancel, onDelete }: Props
       </div>
 
       {/* Content */}
-      <div className="anim-slide-up" style={{ animationDelay: '.15s' }}>
+      <div key={subView} className="anim-slide-up">
         {filtered.length === 0 ? (
           <div className="empty-state">
             <CalendarIcon size={40} className="empty-state-icon" />
@@ -193,6 +193,7 @@ function CalendarView({
           <div className="cal-day-header">
             <span className="cal-day-date">{formatDate(date)}</span>
             {date === TODAY && <span className="cal-day-today">Hoy</span>}
+            <span className="cal-day-count">{slots.length} reserva{slots.length !== 1 ? 's' : ''}</span>
             <div className="cal-day-line" />
           </div>
 
@@ -201,7 +202,7 @@ function CalendarView({
               <span className="cal-time">{r.time}</span>
               <span className="cal-name">{r.name}</span>
               <span className="cal-service">{r.service}</span>
-              <span className={`status-badge ${r.status}`} style={{ fontSize: '9px' }}>
+              <span className={`status-badge ${r.status}`}>
                 {r.status === 'active' ? 'Activa' : 'Cancelada'}
               </span>
               <div className="res-actions">
